@@ -20,14 +20,17 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   }
 }
 
-resource "random_pet" "s3b" {
-}
-
 resource "aws_s3_bucket" "b" {
-  bucket = "${random_pet.s3b.id}"
+  bucket = "3tfstate"
   acl    = "private"
+  versioning {
+    enabled = true
+    }
+  lifecycle {
+    prevent_destroy = true
+    }
   tags = {
-    Name        = "My bucket"
+    Name        = "S3 Remote State Store"
     Environment = "Dev"
   }
 }
