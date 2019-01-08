@@ -1,4 +1,4 @@
-set-secrets.sh
+/set-env.sh
 .vagrant/*
 *.tfstate*
 .terraform/*
