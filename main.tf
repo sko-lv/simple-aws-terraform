@@ -4,37 +4,6 @@ provider "aws" {
     secret_key = "${var.aws_secret_key}"
 }
 
-#resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
-#  name = "terraform-state-lock-dynamo"
-#  hash_key = "LockID"
-#  read_capacity = 20
-#  write_capacity = 20
-# 
-#  attribute {
-#    name = "LockID"
-#    type = "S"
-#  }
-# 
-#  tags {
-#    Name = "DynamoDB Terraform State Lock Table"
-#  }
-#}
-
-#resource "aws_s3_bucket" "b" {
-#  bucket = "3tfstate"
-#  acl    = "private"
-#  versioning {
-#    enabled = true
-#    }
-#  lifecycle {
-#    prevent_destroy = true
-#    }
-#  tags = {
-#    Name        = "S3 Remote State Store"
-#    Environment = "Dev"
-#  }
-#}
-
 resource "aws_security_group" "allow_all" {
   name        = "allow_all"
   description = "Allow all inbound traffic"
