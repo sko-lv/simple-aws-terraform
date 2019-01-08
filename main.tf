@@ -2,7 +2,18 @@ provider "aws" {
     region = "us-east-1"
     access_key = "${var.aws_access_key}"
     secret_key = "${var.aws_secret_key}"
+}
 
+resource "random_pet" "s3b" {
+}
+
+resource "aws_s3_bucket" "b" {
+  bucket = "${random_pet.s3b.id}"
+  acl    = "private"
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
 }
 
 resource "aws_security_group" "allow_all" {
@@ -22,7 +33,6 @@ resource "aws_security_group" "allow_all" {
     to_port         = 0
     protocol        = "-1"
     cidr_blocks     = ["0.0.0.0/0"]
-    prefix_list_ids = ["pl-12c4e678"]
   }
 }
 
@@ -46,9 +56,8 @@ resource "aws_instance" "test_instance" {
     ami = "${var.ami_id}"
     instance_type = "${var.aws_instance_type}"
 
-    vpc_security_group_ids = ["sg-0c8282abe6121302e","sg-08668f6a0cb9950de"]
+    vpc_security_group_ids = ["${aws_security_group.allow_all.id}",]
     key_name = "1"
-    subnet_id = "subnet-0c2cc732acd373275"
     ebs_block_device {
         device_name = "/dev/sdb"
         volume_type = "standard"
@@ -64,3 +73,4 @@ resource "aws_eip" "lb" {
     instance = "${aws_instance.test_instance.id}"
     vpc = true
 }
+
