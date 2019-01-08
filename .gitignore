@@ -4,4 +4,4 @@ set-secrets.sh
 .terraform/*
 *.bak
 tmp/*
-
+/set-env.sh
