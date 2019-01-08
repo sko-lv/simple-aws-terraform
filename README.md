@@ -1,11 +1,11 @@
 Simple terraform project
 -------------------------
 Create on AWS:  
-1.EC2 with custom volumes  
-2.DNS zone  
-3.DNS record for EC2  
-4.ELB  
-Terraform state back-end configured on s3 (now w/o DynamoDB)  
+1. EC2 with custom volumes  
+2. DNS zone  
+3. DNS record for EC2  
+4. ELB  
++ Terraform state back-end configured on s3 (now w/o DynamoDB)  
  
 
 
